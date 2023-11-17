@@ -2,18 +2,17 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import * as AWS from 'aws-sdk';
-
-AWS.config.update({
-  region: "eu-north-1",
-  accessKeyId: "AKIAWF2IOII63NXF4GNJ",
-  secretAccessKey: "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"
-})
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+import * as dotenv from 'dotenv';
+dotenv.config();
+const cors=require("cors")
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule,{cors: true});
+  const app = await NestFactory.create(AppModule);
   
+  app.use(cors({
+    origin:"https://localhost:3005",
+    methods:["GET","POST","PUT","DELETE"]
+  }))
   const config = new DocumentBuilder()
     .setTitle('Form Example')
     .setDescription('The Forms API description')
@@ -23,6 +22,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3335);
+  await app.listen(3005);
 }
 bootstrap();

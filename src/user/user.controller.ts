@@ -2,10 +2,20 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common"
 import { UserService } from "./user.service";
 import { User } from "./user.model";
 
+
 @Controller('user')
 export class UserController{
     constructor(private readonly userService : UserService){}
 
+    @Get('getuser/all')
+      async allUser(){
+         const aluser= await this.userService.allUser();
+         if(!aluser){
+            return "failed"
+         }else {
+            return aluser
+         }
+      }
   @Post('create')
   async insertUser(@Body() user: User) {
     const crtuser = await this.userService.insertUser(user)

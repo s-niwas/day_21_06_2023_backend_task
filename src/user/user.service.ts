@@ -15,6 +15,19 @@ export class UserService{
           return "user created";
       }
     
+      async allUser():Promise<any>{
+        const params = {
+          TableName: Table,
+        }
+        try {
+          const { Items = [] } = await db.scan(params).promise()
+          return Items
+    
+        } catch (error) {
+          console.log(error)
+          return false
+        }
+      }
       async updateUser(id: string, user: User): Promise<any> {
         const params = {
           TableName: Table,
@@ -22,15 +35,16 @@ export class UserService{
             userId: id
           },
           UpdateExpression:
-          'set #name=:userName , #mail =:email , #ph =:phone , #pass=:password ',
+          'set #userName=:userName , #email =:email , #phone =:phone , #password=:password,#eno=:eno,#doa=:doa ',
           ExpressionAttributeValues: {
-            ":userName": user.userName, ":email": user.email, ":phone": user.phone, ":password": user.password,
-          },
+            ":userName": user.userName, ":email": user.email, ":phone": user.phone, ":password": user.password,":eno":user.eno,":doa":user.doa,},
           ExpressionAttributeNames: {
-            "#name":"userName" , 
-            "#mail":"email" ,
-             "#ph" :"phone" , 
-             "#pass":"password",
+            "#userName":"userName" , 
+            "#email":"email" ,
+             "#phone" :"phone" , 
+             "#password":"password",
+             "#eno":"eno",
+             "#doa":"doa"
           }
         }
           await db.update(params).promise()

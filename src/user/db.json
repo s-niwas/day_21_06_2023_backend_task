@@ -1,0 +1,28 @@
+{
+    "posts": [
+      {
+        "id":1,
+        "name": "niwas",
+        "email": "niwas@mail.com",
+        "phone": 9876543210,
+        "eno":1234567000001,
+        "doa":"08-Dec, 2021"
+      },
+      {
+        "id":1,
+        "name": "vighnesh",
+        "email": "vignesh@mail.com",
+        "phone": 9876543210,
+        "eno":1234567000002,
+        "doa":"08-Dec, 2021"
+      },
+      {
+        "id":3,
+        "name": "hari",
+        "email": "hari@mail.com",
+        "phone": 9876543210,
+        "eno":1234567000003,
+        "doa":"08-Dec, 2021"
+      }
+    ]
+  }

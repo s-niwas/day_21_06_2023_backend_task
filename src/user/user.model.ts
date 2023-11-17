@@ -11,6 +11,10 @@ export class User {
     phone: number;
     @ApiProperty({default: 'pass'})
     password: string;
+    @ApiProperty({default: '1234567305477001'})
+    eno: string;
+    @ApiProperty({default: '08-Dec, 2021'})
+    doa: string;
 }
 /*export class User{
     public userId : string;
